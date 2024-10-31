@@ -4,7 +4,7 @@ import { API_ROUTES } from '../utils/constants';
 function formatBooks(bookArray) {
   return bookArray.map((book) => {
     const newBook = { ...book };
-    
+    // eslint-disable-next-line no-underscore-dangle
     newBook.id = newBook._id;
     return newBook;
   });
@@ -27,7 +27,7 @@ export async function getAuthenticatedUser() {
     if (!token) {
       return defaultReturnObject;
     }
-    console.log('Token:', token); 
+    console.log('Token:', token); // Ajout log
     return { authenticated: true, user: { userId, token } };
   } catch (err) {
     console.error('getAuthenticatedUser, Something Went Wrong', err);
@@ -44,7 +44,7 @@ export async function getBooks() {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     });
-   
+    // eslint-disable-next-line array-callback-return
     const books = formatBooks(response.data);
     return books;
   } catch (err) {
@@ -63,7 +63,7 @@ export async function getBook(id) {
       },
     });
     const book = response.data;
-    
+    // eslint-disable-next-line no-underscore-dangle
     book.id = book._id;
     return book;
   } catch (err) {
@@ -115,7 +115,7 @@ export async function rateBook(id, userId, rating) {
       },
     });
     const book = response.data;
-   
+    // eslint-disable-next-line no-underscore-dangle
     book.id = book._id;
     return book;
   } catch (e) {
